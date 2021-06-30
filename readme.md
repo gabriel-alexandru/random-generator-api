@@ -82,8 +82,6 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 - **timestamp** is a UTC formatted string containing date and time of the operation.
 - **color** is an object containing the values for the color in the specified format.
 
----
-
 **Place**
 
 ```json
