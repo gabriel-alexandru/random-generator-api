@@ -54,27 +54,27 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 
 #### Endpoints
 
-| Endpoint                        |                                                 Description                                                  |
-| :------------------------------ | :----------------------------------------------------------------------------------------------------------: |
-| **GET** /people                 |                                Return a Person object with a random _gender_                                 |
-| **GET** /people/:gender         |                              Return a Person object with the specified _gender_                              |
-| **GET** /people/:gender/:amount | Return an array with _amount_ Person objects. If _amount_ equals 1 then return an object instead of an array |
+| Method  | Endpoint                | Description                                                                                                  |
+| ------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **GET** | /people                 | Return a Person object with a random _gender_                                                                |
+| **GET** | /people/:gender         | Return a Person object with the specified _gender_                                                           |
+| **GET** | /people/:gender/:amount | Return an array with _amount_ Person objects. If _amount_ equals 1 then return an object instead of an array |
 
 ---
 
 #### Roll dice
 
-| Endpoint                     |                                                 Description                                                 |
-| :--------------------------- | :---------------------------------------------------------------------------------------------------------: |
-| **GET** /dice                |                                            Return a Roll object                                             |
-| **GET** /dice/:faces         |                          Return a Roll object with the specified number of _faces_                          |
-| **GET** /dice/:faces/:amount | Return an array with _amount_ Roll objects. If _amount_ equals 1 then return an object instead of an array. |
+| Method  | Endpoint             | Description                                                                                                 |
+| ------- | -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **GET** | /dice                | Return a Roll object                                                                                        |
+| **GET** | /dice/:faces         | Return a Roll object with the specified number of _faces_                                                   |
+| **GET** | /dice/:faces/:amount | Return an array with _amount_ Roll objects. If _amount_ equals 1 then return an object instead of an array. |
 
 ---
 
 #### Flip Coin
 
-| Endpoint              |                                                  Description                                                   |
-| :-------------------- | :------------------------------------------------------------------------------------------------------------: |
-| **GET** /coin         |                                            Return a CoinFlip object                                            |
-| **GET** /coin/:amount | Return an array with _amount_ CoinFlip objects. If _amount_ equals 1 the return an object instead of an array. |
+| Method  | Endpoint      | Description                                                                                                    |
+| ------- | ------------- | -------------------------------------------------------------------------------------------------------------- |
+| **GET** | /coin         | Return a CoinFlip object                                                                                       |
+| **GET** | /coin/:amount | Return an array with _amount_ CoinFlip objects. If _amount_ equals 1 the return an object instead of an array. |
