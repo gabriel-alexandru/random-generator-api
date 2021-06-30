@@ -90,7 +90,7 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 {
   "ID": 0,
   "timestamp": "2021-06-30T00:22:18.486Z",
-  "lat": 41.902782",
+  "lat": "41.902782",
   "lon": "12.496366"
 }
 ```
