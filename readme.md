@@ -1,38 +1,54 @@
 # Random Generator API
 
+This is a simple API that generates different random objects. **DISCLAIMER** THIS API IS NOT YET AVAILABLE ONLINE.
+
 #### Response Object
 
 **Person**
 
 ```json
 {
-  "ID": 0, // Progressive counter from 0.
-  "name": "Gabriel", // Name picked randomly from a list of 1000 names for male and 1000 names for female.
-  "surname": "Alexandru", // Surname picked randomly from a list of 50 surnames.
-  "gender": "m", // Specified in the request or choosen random if not defined.
-  "age": 19 // Numbe generated randomly, between 1 and 100.
+  "ID": 0,
+  "name": "Gabriel",
+  "surname": "Alexandru",
+  "gender": "m",
+  "age": 19
 }
 ```
+
+ID is a counter used to identify the object in the array. It starts from 0.
+name is picked randomly from a list of names (1000 for male and 1000 for female).
+surname is picked randomly from a list of 50 surnames.
+gender is specified by the request. If it is not specified, or if is equals to both, it is picked randomly.
+age is a random number between 1 and 100.
 
 **Roll**
 
 ```json
 {
-  "ID": 0, // Progressive counter from 0.
-  "timestamp": "2021-06-30T00:22:18.486Z", // UTC formatted date and time.
-  "roll": 6 // Number generated randomly between 1 and the "number_of_faces" (If not specified will be 6).
+  "ID": 0,
+  "timestamp": "2021-06-30T00:22:18.486Z",
+  "roll": 6
 }
 ```
+
+ID is a counter used to identify the object in the array. It starts from 0.
+timestamp is a UTC formatted string containing date and time of the operation.
+roll is a random number between 1 and the number of faces specified in the request. If it is not specified is assumed to be 6.
 
 **CoinFlip**
 
 ```json
 {
-  "ID": 0, // Progressive counter from 0.
-  "timestamp": "2021-06-30T00:22:18.486Z", // UTC formatted date and time.
-  "flip": "T" // String character picked randomly. Can be "H" (Head) or "T" (Tail).
+  "ID": 0,
+  "timestamp": "2021-06-30T00:22:18.486Z",
+  "flip": "T"
 }
 ```
+
+ID is a counter used to identify the object in the array. It starts from 0.
+timestamp is a UTC formatted string containing date and time of the operation.
+flip is a string character choosen randomly between "H" and "T", head and tail.
 
 ---
 
