@@ -54,70 +54,27 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 
 #### Endpoints
 
-| Endpoint                        | Description                                                                                                      |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **GET** /people                 | Return a Person object with a random _gender_                                                                    |
-| **GET** /people/:gender         | Return a Person object with the specified _gender_                                                               |
-| **GET** /people/:gender/:amount | Will return an array with _amount_ Person object. If _amount_ equals 1 then return an object instead of an array |
+| Endpoint                        | Description                                                                                                  |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **GET** /people                 | Return a Person object with a random _gender_                                                                |
+| **GET** /people/:gender         | Return a Person object with the specified _gender_                                                           |
+| **GET** /people/:gender/:amount | Return an array with _amount_ Person objects. If _amount_ equals 1 then return an object instead of an array |
 
 ---
 
 #### Roll dice
 
-GET /dice/:faces/:amount
-
-Will return an array with _amount_ Roll object with the specified _faces_.
-If _amount_ equals 1 than will return only an object instead of an array.
-
-  <br />
-  Example:
-
-GET /dice/6/2
-<br />
-
-GET /dice/:faces
-
-Will return a Roll object with the specified _faces_.
-
-  <br />
-  Example:
-
-GET /dice/20
-<br />
-
-GET /dice
-
-Will return a Roll object.
-There is the possibility to specify the amount of rolls and the number of faces using **?amount=** and **?faces=**.
-(It's the same as calling GET /dice/:faces/:amount).
-
-  <br />
-  Example:
-
-/dice?amount=10&faces=5
+| Endpoint                     | Description                                                                                                 |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **GET** /dice                | Return a Roll object                                                                                        |
+| **GET** /dice/:faces         | Return a Roll object with the specified number of _faces_                                                   |
+| **GET** /dice/:faces/:amount | Return an array with _amount_ Roll objects. If _amount_ equals 1 then return an object instead of an array. |
 
 ---
 
 #### Flip Coin
 
-GET /coin/:amount
-
-Will return an array with _amount_ CoinFlip objects.
-If _amount_ equals 1 than will return only an object instead of an array.
-
-  <br />
-  Example:
-
-GET /coin/2
-<br />
-
-GET /coin
-
-Will return a CoinFlip objects.
-There is the possibility to specify the amount of times to flip a coin using, for example, **?amount=**.
-(It's the same as calling GET /coin/:amount).
-
-  <br />
-  Example:
-
-/coin?amount=10
+| Endpoint              | Description                                                                                                    |
+| --------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **GET** /coin         | Return a CoinFlip object                                                                                       |
+| **GET** /coin/:amount | Return an array with _amount_ CoinFlip objects. If _amount_ equals 1 the return an object instead of an array. |
