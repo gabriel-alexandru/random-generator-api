@@ -170,6 +170,37 @@ app.get('/color/:format?/:amount?', (req, res) => {
   res.json(data);
 });
 
+// GET /place/:amount
+app.get('/place/:amount?', (req, res) => {
+  let amount = req.params.amount || req.query.amount || 1;
+  let data;
+
+  try {
+    amount = convertToNumber(amount);
+  } catch (error) {
+    res.json({ 'error': 'The amount must be a number!' });
+    return;
+  }
+
+  if (amount > 1) {
+    data = [];
+  } else if (amount <= 0) {
+    res.json({ 'error': 'The amount must be greater than 0!' });
+    return;
+  }
+
+  for (let i = 0; i < amount; i++) {
+    let place = getPlace();
+    place.ID = i;
+    if (amount == 1) {
+      data = place;
+    } else {
+      data.push(place);
+    }
+  }
+  res.json(data);
+});
+
 // --- FUNCTIONS ---
 
 // Function that generates a random color based on the format.
@@ -223,6 +254,22 @@ function getColor(format) {
   } else {
     throw Error('Format not valid.');
   }
+
+  return arr;
+}
+
+// Function that generates a random place.
+function getPlace() {
+  let arr;
+
+  let lat = parseFloat(Math.random() * 180 - 90).toFixed(6);
+  let lon = parseFloat(Math.random() * 360 - 180).toFixed(6);
+
+  arr = {
+    'timestamp': new Date(Date.now()).toJSON(),
+    lat,
+    lon,
+  };
 
   return arr;
 }

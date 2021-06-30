@@ -84,6 +84,24 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 
 ---
 
+**Place**
+
+```json
+{
+  "ID": 0,
+  "timestamp": "2021-06-30T00:22:18.486Z",
+  "lat": 41.902782",
+  "lon": "12.496366"
+}
+```
+
+- **ID** is a counter used to identify the object in the array. It starts from 0.
+- **timestamp** is a UTC formatted string containing date and time of the operation.
+- **lat** is a string containing a random latitude.
+- **lon** ia a string containing a random longitude;
+
+---
+
 ## Generate People
 
 The parameters can be passed using URL query too.
@@ -131,8 +149,19 @@ The parameters can be passed using URL query too.
 
 The parameters can be passed using URL query too.
 
-| Method  | Endpoint               | Description                                                                                                  | Parameters values                                                                                                                                                                                                                |
-| ------- | ---------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **GET** | /color                 | Return a Color object in hexadecimal format.                                                                 |                                                                                                                                                                                                                                  |
-| **GET** | /color/:format         | Return a Color object in the specified format                                                                | <ul> <li>**format**: The format of the color. Possible values are: "HSB" or "HSL", "CMYK", "RGB", "HEX" or "HEXADECIMAL". Not case sensitive.</li> </ul>                                                                         |
-| **GET** | /color/:format/:amount | Return an array with _amount_ Color objects. If _amount_ equals 1 then return an object instead of an array. | ul><li>**format**: The format of the color. Possible values are: "HSB" or "HSL", "CMYK", "RGB", "HEX" or "HEXADECIMAL". Not case sensitive.</li> <li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |
+| Method  | Endpoint               | Description                                                                                                  | Parameters values                                                                                                                                                                                                                 |
+| ------- | ---------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **GET** | /color                 | Return a Color object in hexadecimal format.                                                                 |                                                                                                                                                                                                                                   |
+| **GET** | /color/:format         | Return a Color object in the specified format                                                                | <ul> <li>**format**: The format of the color. Possible values are: "HSB" or "HSL", "CMYK", "RGB", "HEX" or "HEXADECIMAL". Not case sensitive.</li> </ul>                                                                          |
+| **GET** | /color/:format/:amount | Return an array with _amount_ Color objects. If _amount_ equals 1 then return an object instead of an array. | <ul><li>**format**: The format of the color. Possible values are: "HSB" or "HSL", "CMYK", "RGB", "HEX" or "HEXADECIMAL". Not case sensitive.</li> <li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |
+
+---
+
+## Place
+
+The parameters can be passed using URL query too.
+
+| Method  | Endpoint       | Description                                                                                                  | Parameters values                                                                   |
+| ------- | -------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| **GET** | /place         | Return a Place object.                                                                                       |                                                                                     |
+| **GET** | /place/:amount | Return an array with _amount_ Place objects. If _amount_ equals 1 then return an object instead of an array. | <ul><li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |
