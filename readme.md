@@ -62,7 +62,7 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 
 - **ID** is a counter used to identify the object in the array. It starts from 0.
 - **timestamp** is a UTC formatted string containing date and time of the operation.
-- **result** is a string with the three possible result: "Rock", "Paper"; "Scissor".
+- **result** is a string with the three possible result: "Rock", "Paper", "Scissor".
 
 ---
 
