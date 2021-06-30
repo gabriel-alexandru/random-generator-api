@@ -16,7 +16,30 @@ app.listen(3000);
 app.get('/dice/:faces?/:amount?', (req, res) => {
   let faces = req.params.faces || req.query.faces || 6;
   let amount = req.params.amount || req.query.amount || 1;
-  let data = rollDice(faces, amount);
+  let data;
+
+  try {
+    amount = convertToNumber(amount);
+  } catch (error) {
+    res.json({ 'error': 'The amount must be a number!' });
+    return;
+  }
+
+  if (amount >= 1) {
+    data = [];
+  } else if (amount <= 0) {
+    res.json({ 'error': 'The amount must be greater than 0!' });
+    return;
+  }
+  for (let i = 0; i < amount; i++) {
+    let roll = rollDice(faces);
+    roll.ID = i;
+    if (amount == 1) {
+      data = roll;
+    } else {
+      data.push(roll);
+    }
+  }
   res.json(data);
 });
 
@@ -24,14 +47,66 @@ app.get('/dice/:faces?/:amount?', (req, res) => {
 app.get('/people/:gender?/:amount?', (req, res) => {
   let gender = req.params.gender || req.query.gender || 'both';
   let amount = req.params.amount || req.query.amount || 1;
-  let data = generatePeople(gender, amount);
+  let data;
+
+  try {
+    amount = convertToNumber(amount);
+  } catch (error) {
+    res.json({ 'error': 'The amount must be a number!' });
+    return;
+  }
+  if (amount >= 1) {
+    data = [];
+  } else if (amount <= 0) {
+    res.json({ 'error': 'The amount must be greater than 0!' });
+    return;
+  }
+
+  for (let i = 0; i < amount; i++) {
+    let person;
+    try {
+      person = generatePeople(gender);
+      person.ID = i;
+    } catch (error) {
+      res.json({ 'error': 'Gender not valid!' });
+      return;
+    }
+    if (amount == 1) {
+      data = person;
+    } else {
+      data.push(person);
+    }
+  }
+
   res.json(data);
 });
 
 // GET /coin/:amount
 app.get('/coin/:amount?', (req, res) => {
   let amount = req.params.amount || req.query.amount || 1;
-  let data = flipCoin(amount);
+  let data;
+  try {
+    amount = convertToNumber(amount);
+  } catch (error) {
+    res.json({ 'error': 'The amount must be a number!' });
+    return;
+  }
+
+  if (amount > 1) {
+    data = [];
+  } else if (amount <= 0) {
+    res.json({ 'error': 'The amount must be greater than 0!' });
+    return;
+  }
+  for (let i = 0; i < amount; i++) {
+    let flip = flipCoin();
+    flip.ID = i;
+    if (amount == 1) {
+      data = flip;
+    } else {
+      data.push(flip);
+    }
+  }
   res.json(data);
 });
 
@@ -57,9 +132,41 @@ app.get('/rps', (req, res) => {
   res.json(data);
 });
 
-app.get('/color/:format?', (req, res) => {
+// GET /color/:format/:amount
+app.get('/color/:format?/:amount?', (req, res) => {
   let format = req.params.format || req.query.format || 'hexadecimal';
-  let data = getColor(format);
+  let amount = req.params.amount || req.query.amount || 1;
+  let data;
+
+  try {
+    amount = convertToNumber(amount);
+  } catch (error) {
+    res.json({ 'error': 'The amount must be a number!' });
+    return;
+  }
+
+  if (amount > 1) {
+    data = [];
+  } else if (amount <= 0) {
+    res.json({ 'error': 'The amount must be greater than 0!' });
+    return;
+  }
+
+  for (let i = 0; i < amount; i++) {
+    let color;
+    try {
+      color = getColor(format);
+      color.ID = i;
+    } catch (error) {
+      res.json({ 'error': 'Format not valid!' });
+      return;
+    }
+    if (amount == 1) {
+      data = color;
+    } else {
+      data.push(color);
+    }
+  }
   res.json(data);
 });
 
@@ -69,7 +176,6 @@ app.get('/color/:format?', (req, res) => {
 // Return error in case the format is not valid.
 function getColor(format) {
   let arr = {
-    'ID': 0,
     'timestamp': new Date(Date.now()).toJSON(),
   };
 
@@ -115,59 +221,44 @@ function getColor(format) {
         Math.floor(Math.random() * 256).toString(16),
     };
   } else {
-    arr = {
-      'error': 'Format not valid',
-    };
+    throw Error('Format not valid.');
   }
 
   return arr;
 }
 
+function convertToNumber(value) {
+  switch (isNumber(value)) {
+    case -1:
+      throw Error('Not a number');
+    case 0:
+      return value;
+    case 1:
+      return Number(value);
+  }
+}
+
 // Flip n coins. Return the array containg n Roll objects or, if only 1 flip, the Roll object.
 // Return some error in case amount is NaN or is below 0.
-function flipCoin(amount) {
-  let arr = [];
+function flipCoin() {
+  let arr;
 
-  switch (isNumber(amount)) {
-    case -1:
-      return { 'error': 'The amount needs to be a number.' };
+  let side;
 
-    case 0:
-      break;
-
-    case 1:
-      amount = Number(amount);
-      break;
+  // Choose random wether Head or Tail.
+  if (Math.random() < 0.5) {
+    side = 'T';
+  } else {
+    side = 'H';
   }
 
-  if (amount <= 0) {
-    return { 'error': 'The amount cannot be below 0.' };
-  }
+  // Create the JSON object.
+  arr = {
+    'timestamp': new Date(Date.now()).toJSON(),
+    'flip': side,
+  };
 
-  // Generate the coin flips.
-  for (let i = 0; i < amount; i++) {
-    let side;
-
-    // Choose random wether Head or Tail.
-    if (Math.random() < 0.5) {
-      side = 'T';
-    } else {
-      side = 'H';
-    }
-
-    // Create the JSON object.
-    arr.push({
-      'ID': i,
-      'timestamp': new Date(Date.now()).toJSON(),
-      'flip': side,
-    });
-  }
-
-  if (arr.length == 1) {
-    return arr[0];
-  } else if (arr.length > 1) {
-    return arr;
-  }
+  return arr;
 }
 
 // Function that checks if a variable is a number. Check if a string is a "number" too.
@@ -194,137 +285,72 @@ function readFile(filePath, separator) {
 // Function that generate n Person object. Return the array or, if only 1 Person, the object.
 // Return some error in case the amount is NaN or is below 0.
 // Return error if gender is not valid.
-function generatePeople(gender, amount) {
+function generatePeople(gender) {
   // Read the names and the surnames from the files.
   let surnames = readFile(process.env.ASSETS_PATH + 'surname.txt', '\n');
   let boyNames = readFile(process.env.ASSETS_PATH + 'nameBoy.txt', '\n');
   let girlNames = readFile(process.env.ASSETS_PATH + 'nameGirl.txt', '\n');
 
-  let arr = [];
-  switch (isNumber(amount)) {
-    case -1:
-      return {
-        'error': 'The amount needs to be a number.',
-      };
-
-    case 0:
-      break;
-
-    case 1:
-      amount = Number(amount);
-      break;
-  }
-
-  if (amount <= 0) {
-    return { 'error': 'The amount cannot be below 0.' };
-  }
+  let arr;
   // Generate the people.
-  for (let i = 0; i < amount; i++) {
-    let name, surname, gen, age;
-    if (gender == '' || gender.match(/both/i)) {
-      // If gender isn't specified randomly choose between 'm' and 'f'.
-      // Choose a random name based on this.
-      if (Math.random() < 0.5) {
-        name = boyNames[Math.floor(Math.random() * boyNames.length)];
-        gen = 'm';
-      } else {
-        name = girlNames[Math.floor(Math.random() * girlNames.length)];
-        gen = 'f';
-      }
+  let name, surname, gen, age;
+  if (gender == '' || gender.match(/both/i)) {
+    // If gender isn't specified randomly choose between 'm' and 'f'.
+    // Choose a random name based on this.
+    if (Math.random() < 0.5) {
+      name = boyNames[Math.floor(Math.random() * boyNames.length)];
+      gen = 'm';
     } else {
-      // If gender is specified check wether it is 'm' or 'f'.
-      // Choose a random name based on this.
-      if (gender.match(/^m(ale)?$/i)) {
-        name = boyNames[Math.floor(Math.random() * boyNames.length)];
-        gen = 'm';
-      } else if (gender.match(/^f(emale)?$/i)) {
-        name = girlNames[Math.floor(Math.random() * girlNames.length)];
-        gen = 'f';
-      } else {
-        return { 'error': 'Gender not valid.' };
-      }
+      name = girlNames[Math.floor(Math.random() * girlNames.length)];
+      gen = 'f';
     }
-    // Choose a random surname.
-    surname = surnames[Math.floor(Math.random() * surnames.length)];
-
-    // Choose a random age.
-    age = rollDice(100, 1).roll;
-
-    // Create the JSON object.
-    arr.push({
-      'ID': i,
-      'name': name,
-      'surname': surname,
-      'gender': gen,
-      'age': age,
-    });
+  } else {
+    // If gender is specified check wether it is 'm' or 'f'.
+    // Choose a random name based on this.
+    if (gender.match(/^m(ale)?$/i)) {
+      name = boyNames[Math.floor(Math.random() * boyNames.length)];
+      gen = 'm';
+    } else if (gender.match(/^f(emale)?$/i)) {
+      name = girlNames[Math.floor(Math.random() * girlNames.length)];
+      gen = 'f';
+    } else {
+      throw Error('Gender not valid');
+    }
   }
+  // Choose a random surname.
+  surname = surnames[Math.floor(Math.random() * surnames.length)];
 
-  if (arr.length == 1) {
-    return arr[0];
-  } else if (arr.length > 1) {
-    return arr;
-  }
+  // Choose a random age.
+  age = rollDice(100, 1).roll;
+
+  // Create the JSON object.
+  arr = {
+    'name': name,
+    'surname': surname,
+    'gender': gen,
+    'age': age,
+  };
+
+  return arr;
 }
 
 // Function that generate n Roll objects. Return the array or, if only 1 Roll, the object.
 // Return some error if the number of faces is NaN or is below 0.
 // Return some error is the amount is NaN or is below 0.
-function rollDice(faces, amount) {
-  let arr = [];
+function rollDice(faces) {
+  let arr;
 
-  switch (isNumber(faces)) {
-    case -1:
-      return {
-        'error': 'The number of faces needs to be a Number.',
-      };
-
-    case 0:
-      break;
-
-    case 1:
-      faces = Number(faces);
-      break;
-  }
-
-  switch (isNumber(amount)) {
-    case -1:
-      return {
-        'error': 'The amount needs to be a Number.',
-      };
-
-    case 0:
-      break;
-
-    case 1:
-      amount = Number(amount);
-      break;
-  }
+  faces = convertToNumber(faces);
 
   if (faces <= 0) {
     return {
       'error': 'The number of faces cannot be below 0.',
     };
   }
-
-  if (amount <= 0) {
-    return {
-      'error': 'The amount cannot be below 0.',
-    };
-  }
-
-  // Generate the rolls.
-  for (let i = 0; i < amount; i++) {
-    // Create the JSON object.
-    arr.push({
-      'ID': i,
-      'timestamp': new Date(Date.now()).toJSON(),
-      'roll': Math.round(Math.random() * (faces - 1) + 1),
-    });
-  }
-  if (arr.length == 1) {
-    return arr[0];
-  } else if (arr.length > 1) {
-    return arr;
-  }
+  // Create the JSON object.
+  arr = {
+    'timestamp': new Date(Date.now()).toJSON(),
+    'roll': Math.round(Math.random() * (faces - 1) + 1),
+  };
+  return arr;
 }
