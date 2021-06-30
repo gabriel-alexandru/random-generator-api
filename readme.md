@@ -17,9 +17,13 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 ```
 
 **ID** is a counter used to identify the object in the array. It starts from 0.
+
 **name** is picked randomly from a list of names (1000 for male and 1000 for female).
+
 **surname** is picked randomly from a list of 50 surnames.
+
 **gender** is specified by the request. If it is not specified, or if is equals to both, it is picked randomly.
+
 **age** is a random number between 1 and 100.
 
 **Roll**
@@ -33,7 +37,9 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 ```
 
 **ID** is a counter used to identify the object in the array. It starts from 0.
+
 **timestamp** is a UTC formatted string containing date and time of the operation.
+
 **roll** is a random number between 1 and the number of faces specified in the request. If it is not specified is assumed to be 6.
 
 **CoinFlip**
@@ -47,12 +53,14 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 ```
 
 **ID** is a counter used to identify the object in the array. It starts from 0.
+
 **timestamp** is a UTC formatted string containing date and time of the operation.
+
 **flip** is a string character choosen randomly between "H" and "T", head and tail.
 
 ---
 
-#### Endpoints
+#### Generate People
 
 | Method  | Endpoint                | Description                                                                                                  |
 | ------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
