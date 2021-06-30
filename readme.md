@@ -2,7 +2,7 @@
 
 This is a simple API that generates different random objects. **DISCLAIMER** THIS API IS NOT YET AVAILABLE ONLINE.
 
-#### Response Object
+## Response Object
 
 **Person**
 
@@ -52,7 +52,7 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 
 ---
 
-#### Generate People
+## Generate People
 
 The parameters can be passed using URL query too.
 
@@ -64,7 +64,7 @@ The parameters can be passed using URL query too.
 
 ---
 
-#### Roll dice
+## Roll dice
 
 The parameters can be passed using URL query too.
 
@@ -76,7 +76,7 @@ The parameters can be passed using URL query too.
 
 ---
 
-#### Flip Coin
+## Flip Coin
 
 The parameters can be passed using URL query too.
 
