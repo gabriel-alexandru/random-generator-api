@@ -54,15 +54,19 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 
 #### Generate People
 
+The parameters can be passed using URL query too.
+
 | Method  | Endpoint                | Description                                                                                                  | Parameters values                                                                                                                                                       |
 | ------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **GET** | /people                 | Return a Person object with a random _gender_                                                                | null                                                                                                                                                                    |
+| **GET** | /people                 | Return a Person object with a random _gender_                                                                |                                                                                                                                                                         |
 | **GET** | /people/:gender         | Return a Person object with the specified _gender_                                                           | <ul><li>**gender**: "male" or "m", "female" or "f", "both". Not case sensitive.</li></ul>                                                                               |
 | **GET** | /people/:gender/:amount | Return an array with _amount_ Person objects. If _amount_ equals 1 then return an object instead of an array | <ul><li> **gender**: "male" or "m", "female" or "f", "both". Not case sensitive.</li> <li> - **amount**: The amount of objects wanted. Must be greater than 0</li></ul> |
 
 ---
 
 #### Roll dice
+
+The parameters can be passed using URL query too.
 
 | Method  | Endpoint             | Description                                                                                                 | Parameters values                                                                                                                                                 |
 | ------- | -------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -73,6 +77,8 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 ---
 
 #### Flip Coin
+
+The parameters can be passed using URL query too.
 
 | Method  | Endpoint      | Description                                                                                                    | Parameters values                                                                    |
 | ------- | ------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
