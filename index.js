@@ -35,6 +35,28 @@ app.get('/coin/:amount?', (req, res) => {
   res.json(data);
 });
 
+// GET /rps
+app.get('/rps', (req, res) => {
+  let roll = rollDice(3, 1).roll;
+  let data = {
+    'ID': 0,
+    'timestamp': new Date(Date.now()).toJSON(),
+  };
+  switch (roll) {
+    case 1:
+      data.result = 'Rock';
+      break;
+    case 2:
+      data.result = 'Paper';
+      break;
+    case 3:
+      data.result = 'Scissor';
+      break;
+  }
+
+  res.json(data);
+});
+
 // --- FUNCTIONS ---
 
 // Flip n coins. Return the array containg n Roll objects or, if only 1 flip, the Roll object.

@@ -50,6 +50,20 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 - **timestamp** is a UTC formatted string containing date and time of the operation.
 - **flip** is a string character choosen randomly between "H" and "T", head and tail.
 
+**RPS**
+
+```json
+{
+  "ID": 0,
+  "timestamp": "2021-06-30T00:22:18.486Z",
+  "result": "Rock"
+}
+```
+
+- **ID** is a counter used to identify the object in the array. It starts from 0.
+- **timestamp** is a UTC formatted string containing date and time of the operation.
+- **result** is a string with the three possible result: "Rock", "Paper"; "Scissor".
+
 ---
 
 ## Generate People
@@ -84,3 +98,11 @@ The parameters can be passed using URL query too.
 | ------- | ------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | **GET** | /coin         | Return a CoinFlip object                                                                                        |
 | **GET** | /coin/:amount | Return an array with _amount_ CoinFlip objects. If _amount_ equals 1 then return an object instead of an array. | <ul> <li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |
+
+---
+
+## RockPaperScissor
+
+| Method  | Endpoint | Description         | Parameters values |
+| ------- | -------- | ------------------- | ----------------- |
+| **GET** | /rps     | Return a RPS object |                   |
