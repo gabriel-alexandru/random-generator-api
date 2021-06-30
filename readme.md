@@ -80,7 +80,7 @@ The parameters can be passed using URL query too.
 
 The parameters can be passed using URL query too.
 
-| Method  | Endpoint      | Description                                                                                                    | Parameters values                                                                    |
-| ------- | ------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **GET** | /coin         | Return a CoinFlip object                                                                                       |
-| **GET** | /coin/:amount | Return an array with _amount_ CoinFlip objects. If _amount_ equals 1 the return an object instead of an array. | <ul> <li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |
+| Method  | Endpoint      | Description                                                                                                     | Parameters values                                                                    |
+| ------- | ------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **GET** | /coin         | Return a CoinFlip object                                                                                        |
+| **GET** | /coin/:amount | Return an array with _amount_ CoinFlip objects. If _amount_ equals 1 then return an object instead of an array. | <ul> <li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |
