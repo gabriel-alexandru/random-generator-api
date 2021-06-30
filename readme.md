@@ -106,3 +106,12 @@ The parameters can be passed using URL query too.
 | Method  | Endpoint | Description         | Parameters values |
 | ------- | -------- | ------------------- | ----------------- |
 | **GET** | /rps     | Return a RPS object |                   |
+
+---
+
+## Color
+
+| Method  | Endpoint       | Description                                   | Parameters values                                                                                                                                        |
+| ------- | -------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **GET** | /color         | Return a Color object in hexadecimal format.  |                                                                                                                                                          |
+| **GET** | /color/:format | Return a Color object in the specified format | <ul> <li>**format**: The format of the color. Possible values are: "HSB" or "HSL", "CMYK", "RGB", "HEX" or "HEXADECIMAL". Not case sensitive.</li> </ul> |

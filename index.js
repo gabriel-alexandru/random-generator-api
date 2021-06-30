@@ -57,7 +57,71 @@ app.get('/rps', (req, res) => {
   res.json(data);
 });
 
+app.get('/color/:format?', (req, res) => {
+  let format = req.params.format || req.query.format || 'hexadecimal';
+  let data = getColor(format);
+  res.json(data);
+});
+
 // --- FUNCTIONS ---
+
+// Function that generates a random color based on the format.
+// Return error in case the format is not valid.
+function getColor(format) {
+  let arr = {
+    'ID': 0,
+    'timestamp': new Date(Date.now()).toJSON(),
+  };
+
+  if (format.match(/^hs[(bl)]?$/i)) {
+    // HSL or HSB
+    let h = Math.floor(Math.random() * 360);
+    let s = Math.floor(Math.random() * 100);
+    let b = Math.floor(Math.random() * 100);
+    arr.color = {
+      h,
+      s,
+      b,
+    };
+  } else if (format.match(/rgb/i)) {
+    // RGB
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    arr.color = {
+      r,
+      g,
+      b,
+    };
+  } else if (format.match(/cmyk/i)) {
+    // CMYK
+    let c = Math.floor(Math.random() * 100);
+    let m = Math.floor(Math.random() * 100);
+    let y = Math.floor(Math.random() * 100);
+    let k = Math.floor(Math.random() * 100);
+    arr.color = {
+      c,
+      m,
+      y,
+      k,
+    };
+  } else if (format.match(/^(hex)(adecimal)?$/i)) {
+    // HEXADECIMAL
+    arr.color = {
+      'hex':
+        '#' +
+        Math.floor(Math.random() * 256).toString(16) +
+        Math.floor(Math.random() * 256).toString(16) +
+        Math.floor(Math.random() * 256).toString(16),
+    };
+  } else {
+    arr = {
+      'error': 'Format not valid',
+    };
+  }
+
+  return arr;
+}
 
 // Flip n coins. Return the array containg n Roll objects or, if only 1 flip, the Roll object.
 // Return some error in case amount is NaN or is below 0.
@@ -157,7 +221,7 @@ function generatePeople(gender, amount) {
   // Generate the people.
   for (let i = 0; i < amount; i++) {
     let name, surname, gen, age;
-    if (gender == '' || gender.match(/both/)) {
+    if (gender == '' || gender.match(/both/i)) {
       // If gender isn't specified randomly choose between 'm' and 'f'.
       // Choose a random name based on this.
       if (Math.random() < 0.5) {
@@ -170,10 +234,10 @@ function generatePeople(gender, amount) {
     } else {
       // If gender is specified check wether it is 'm' or 'f'.
       // Choose a random name based on this.
-      if (gender.match(/^[Mm](ale)?$/)) {
+      if (gender.match(/^m(ale)?$/i)) {
         name = boyNames[Math.floor(Math.random() * boyNames.length)];
         gen = 'm';
-      } else if (gender.match(/^[Ff](emale)?$/)) {
+      } else if (gender.match(/^f(emale)?$/i)) {
         name = girlNames[Math.floor(Math.random() * girlNames.length)];
         gen = 'f';
       } else {
