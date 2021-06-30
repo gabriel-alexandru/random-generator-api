@@ -64,6 +64,24 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 - **timestamp** is a UTC formatted string containing date and time of the operation.
 - **result** is a string with the three possible result: "Rock", "Paper", "Scissor".
 
+**Color**
+
+```json
+{
+  "ID": 0,
+  "timestamp": "2021-06-30T00:22:18.486Z",
+  "color": {
+    "r": 255,
+    "g": 255,
+    "b": 255
+  }
+}
+```
+
+- **ID** is a counter used to identify the object in the array. It starts from 0.
+- **timestamp** is a UTC formatted string containing date and time of the operation.
+- **color** is an object containing the values for the color in the specified format.
+
 ---
 
 ## Generate People
