@@ -129,6 +129,8 @@ The parameters can be passed using URL query too.
 
 ## Color
 
+The parameters can be passed using URL query too.
+
 | Method  | Endpoint       | Description                                   | Parameters values                                                                                                                                        |
 | ------- | -------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **GET** | /color         | Return a Color object in hexadecimal format.  |                                                                                                                                                          |
