@@ -216,9 +216,9 @@ function getColor(format) {
 
   if (format.match(/^hs[(bl)]?$/i)) {
     // HSL or HSB
-    let h = Math.floor(Math.random() * 360);
-    let s = Math.floor(Math.random() * 100);
-    let b = Math.floor(Math.random() * 100);
+    let h = random(0, 360);
+    let s = random(0, 100);
+    let b = random(0, 100);
     arr.color = {
       h,
       s,
@@ -226,9 +226,9 @@ function getColor(format) {
     };
   } else if (format.match(/rgb/i)) {
     // RGB
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
+    let r = random(0, 256);
+    let g = random(0, 256);
+    let b = random(0, 256);
     arr.color = {
       r,
       g,
@@ -236,10 +236,10 @@ function getColor(format) {
     };
   } else if (format.match(/cmyk/i)) {
     // CMYK
-    let c = Math.floor(Math.random() * 100);
-    let m = Math.floor(Math.random() * 100);
-    let y = Math.floor(Math.random() * 100);
-    let k = Math.floor(Math.random() * 100);
+    let c = random(0, 100);
+    let m = random(0, 100);
+    let y = random(0, 100);
+    let k = random(0, 100);
     arr.color = {
       c,
       m,
@@ -251,9 +251,9 @@ function getColor(format) {
     arr.color = {
       'hex':
         '#' +
-        Math.floor(Math.random() * 256).toString(16) +
-        Math.floor(Math.random() * 256).toString(16) +
-        Math.floor(Math.random() * 256).toString(16),
+        random(0, 256).toString(16) +
+        random(0, 256).toString(16) +
+        random(0, 256).toString(16),
     };
   } else {
     throw Error('Format not valid.');
@@ -349,30 +349,30 @@ function generatePeople(gender) {
     // If gender isn't specified randomly choose between 'm' and 'f'.
     // Choose a random name based on this.
     if (Math.random() < 0.5) {
-      name = boyNames[Math.floor(Math.random() * boyNames.length)];
+      name = boyNames[random(0, boyNames.length)];
       gen = 'm';
     } else {
-      name = girlNames[Math.floor(Math.random() * girlNames.length)];
+      name = girlNames[random(0, girlNames.length)];
       gen = 'f';
     }
   } else {
     // If gender is specified check wether it is 'm' or 'f'.
     // Choose a random name based on this.
     if (gender.match(/^m(ale)?$/i)) {
-      name = boyNames[Math.floor(Math.random() * boyNames.length)];
+      name = boyNames[random(0, boyNames.length)];
       gen = 'm';
     } else if (gender.match(/^f(emale)?$/i)) {
-      name = girlNames[Math.floor(Math.random() * girlNames.length)];
+      name = girlNames[random(0, girlNames.length)];
       gen = 'f';
     } else {
       throw Error('Gender not valid');
     }
   }
   // Choose a random surname.
-  surname = surnames[Math.floor(Math.random() * surnames.length)];
+  surname = surnames[random(0, surnames.length)];
 
   // Choose a random age.
-  age = rollDice(100, 1).roll;
+  age = rollDice(100).roll;
 
   // Create the JSON object.
   arr = {
@@ -401,7 +401,11 @@ function rollDice(faces) {
   // Create the JSON object.
   arr = {
     'timestamp': new Date(Date.now()).toJSON(),
-    'roll': Math.round(Math.random() * (faces - 1) + 1),
+    'roll': random(1, faces),
   };
   return arr;
+}
+
+function random(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
 }
