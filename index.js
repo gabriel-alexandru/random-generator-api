@@ -4,16 +4,21 @@ const fs = require('fs');
 const cors = require('cors');
 require('dotenv').config();
 
+console.log('Server starting...');
+
 // Create the app and setup listening on port 3000.
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.listen(3000);
+app.set('port', 3000);
+app.listen(app.get('port'));
+console.log('Listening on port: ' + app.get('port'));
 
 // --- ROUTES ---
 
 // GET /dice/:faces/:amount route.
 app.get('/dice/:faces?/:amount?', (req, res) => {
+  console.log(req.hostname + ' requested: ' + req.path);
   let faces = req.params.faces || req.query.faces || 6;
   let amount = req.params.amount || req.query.amount || 1;
   let data;
@@ -45,6 +50,7 @@ app.get('/dice/:faces?/:amount?', (req, res) => {
 
 // GET /people/:gender/:amount
 app.get('/people/:gender?/:amount?', (req, res) => {
+  console.log(req.hostname + ' requested: ' + req.path);
   let gender = req.params.gender || req.query.gender || 'both';
   let amount = req.params.amount || req.query.amount || 1;
   let data;
@@ -83,6 +89,7 @@ app.get('/people/:gender?/:amount?', (req, res) => {
 
 // GET /coin/:amount
 app.get('/coin/:amount?', (req, res) => {
+  console.log(req.hostname + ' requested: ' + req.path);
   let amount = req.params.amount || req.query.amount || 1;
   let data;
   try {
@@ -112,6 +119,7 @@ app.get('/coin/:amount?', (req, res) => {
 
 // GET /rps
 app.get('/rps', (req, res) => {
+  console.log(req.hostname + ' requested: ' + req.path);
   let roll = rollDice(3, 1).roll;
   let data = {
     'ID': 0,
@@ -134,6 +142,7 @@ app.get('/rps', (req, res) => {
 
 // GET /color/:format/:amount
 app.get('/color/:format?/:amount?', (req, res) => {
+  console.log(req.hostname + ' requested: ' + req.path);
   let format = req.params.format || req.query.format || 'hexadecimal';
   let amount = req.params.amount || req.query.amount || 1;
   let data;
@@ -172,6 +181,7 @@ app.get('/color/:format?/:amount?', (req, res) => {
 
 // GET /place/:amount
 app.get('/place/:amount?', (req, res) => {
+  console.log(req.hostname + ' requested: ' + req.path);
   let amount = req.params.amount || req.query.amount || 1;
   let data;
 
