@@ -344,7 +344,7 @@ function generatePeople(gender) {
 
   let arr;
   // Generate the people.
-  let name, surname, gen, age;
+  let name, surname, gen, age, dateOfBirth;
   if (gender == '' || gender.match(/both/i)) {
     // If gender isn't specified randomly choose between 'm' and 'f'.
     // Choose a random name based on this.
@@ -371,8 +371,10 @@ function generatePeople(gender) {
   // Choose a random surname.
   surname = surnames[random(0, surnames.length)];
 
-  // Choose a random age.
-  age = rollDice(100).roll;
+  dateOfBirth = generateDate();
+
+  // Choose age based on date of birth.
+  age = generateAge(dateOfBirth);
 
   // Create the JSON object.
   arr = {
@@ -380,6 +382,7 @@ function generatePeople(gender) {
     'surname': surname,
     'gender': gen,
     'age': age,
+    'dateOfBirth': dateOfBirth,
   };
 
   return arr;
@@ -406,6 +409,34 @@ function rollDice(faces) {
   return arr;
 }
 
+function generateDate() {
+  const todayTimestamp = new Date().getTime();
+  const randomDate = new Date(random(0, todayTimestamp));
+  let year = randomDate.getFullYear();
+  let month = randomDate.getMonth() + 1;
+  let day = randomDate.getDate();
+  let date = {
+    'year': year,
+    'month': month,
+    'day': day,
+  };
+  return date;
+}
+
 function random(min, max) {
   return Math.round(Math.random() * (max - min) + min);
+}
+
+function generateAge(date) {
+  const today = new Date();
+  let age = today.getFullYear() - date.year;
+  if (today.getMonth() + 1 < date.month) {
+    age--;
+  } else if (today.getMonth() + 1 == date.month) {
+    if (today.getDate() < date.day) {
+      age--;
+    }
+  }
+
+  return age;
 }

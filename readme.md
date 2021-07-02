@@ -12,7 +12,12 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
   "name": "John",
   "surname": "Doe",
   "gender": "m",
-  "age": 19
+  "age": 19,
+  "dateOfBirth": {
+    "year": 2001,
+    "month": 7,
+    "day": 14
+  }
 }
 ```
 
@@ -20,7 +25,8 @@ This is a simple API that generates different random objects. **DISCLAIMER** THI
 - **name** is picked randomly from a list of names (1000 for male and 1000 for female).
 - **surname** is picked randomly from a list of 50 surnames.
 - **gender** is specified by the request. If it is not specified, or if is equals to both, it is picked randomly.
-- **age** is a random number between 1 and 100.
+- **age** is a number generated based on today's date and the date of birth.
+- **date** is a randomly generated date.
 
 **Roll**
 
