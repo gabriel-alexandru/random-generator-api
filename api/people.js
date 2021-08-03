@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-require('dotenv/config');
 const fs = require('fs');
+const path = require('path');
 
 // GET /people/:gender/:amount
 router.get('/:gender?/:amount?', (req, res) => {
@@ -81,9 +81,12 @@ function readFile(filePath, separator) {
 // Return error if gender is not valid.
 function generatePeople(gender) {
   // Read the names and the surnames from the files.
-  let surnames = readFile('../assets/surname.txt', '\n');
-  let boyNames = readFile('../assets/nameBoy.txt', '\n');
-  let girlNames = readFile('../assets/nameGirl.txt', '\n');
+  const dir = path.resolve('./', 'assets');
+
+  const filenames = fs.readdirSync(dir);
+  let surnames = readFile(path.join(dir, filenames[2]), '\n');
+  let boyNames = readFile(path.join(dir, filenames[0]), '\n');
+  let girlNames = readFile(path.join(dir, filenames[1]), '\n');
 
   let arr;
   // Generate the people.
