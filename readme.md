@@ -1,6 +1,8 @@
 # Random Generator API
 
-This is a simple API that generates different random objects. **DISCLAIMER** THIS API IS NOT YET AVAILABLE ONLINE.
+This is a simple API that generates different random objects.
+
+The API is published here: [https://random-generator-api.vercel.app](https://random-generator-api.vercel.app);
 
 ## Response Object
 
