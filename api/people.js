@@ -81,9 +81,9 @@ function readFile(filePath, separator) {
 // Return error if gender is not valid.
 function generatePeople(gender) {
   // Read the names and the surnames from the files.
-  let surnames = readFile(process.env.ASSETS_PATH + 'surname.txt', '\n');
-  let boyNames = readFile(process.env.ASSETS_PATH + 'nameBoy.txt', '\n');
-  let girlNames = readFile(process.env.ASSETS_PATH + 'nameGirl.txt', '\n');
+  let surnames = readFile('./assets/surname.txt', '\n');
+  let boyNames = readFile('./assets/nameBoy.txt', '\n');
+  let girlNames = readFile('./assets/nameGirl.txt', '\n');
 
   let arr;
   // Generate the people.
