@@ -16,7 +16,11 @@ app.use(express.json());
 app.listen(3000);
 
 // --- ROUTES ---
-
+app.get('/', (req, res) => {
+  res.redirect(
+    'https://github.com/gabriel-alexandru/random-generator-api#readme'
+  );
+});
 app.use('/coin', coin);
 app.use('/color', color);
 app.use('/dice', dice);
