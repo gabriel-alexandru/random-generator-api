@@ -6,6 +6,20 @@ The API is published here: [https://random-generator-api.vercel.app](https://ran
 
 ## Response Object
 
+**Error**
+
+Return a 400 HTTP code with the following JSON object.
+
+```json
+{
+  "status": 400,
+  "error": "Error message"
+}
+```
+
+- **status** is the HTTP status code for the error.
+- **error** is the string with a message related to the error.
+
 **Person**
 
 ```json
