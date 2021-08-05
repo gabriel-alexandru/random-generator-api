@@ -10,25 +10,43 @@ router.get('/:faces?/:amount?', (req, res) => {
   try {
     amount = convertToNumber(amount);
   } catch (error) {
-    res.json({ 'error': 'The amount must be a number!' });
+    res.status(400);
+    res.json({
+      'status': 400,
+      'error': error,
+    });
     return;
   }
 
   if (amount >= 1) {
     data = [];
   } else if (amount <= 0) {
-    res.json({ 'error': 'The amount must be greater than 0!' });
+    res.status(400);
+    res.json({
+      'status': 400,
+      'error': 'The amount must be a positive number greater than 0!',
+    });
     return;
   }
   for (let i = 0; i < amount; i++) {
-    let roll = rollDice(faces);
-    roll.ID = i;
+    let roll;
+    try {
+      roll = rollDice(faces);
+      roll.ID = i;
+    } catch (error) {
+      res.status(400);
+      res.json({
+        'status': 400,
+        'error': error,
+      });
+    }
     if (amount == 1) {
       data = roll;
     } else {
       data.push(roll);
     }
   }
+  res.status(200);
   res.json(data);
 });
 
@@ -37,7 +55,7 @@ router.get('/:faces?/:amount?', (req, res) => {
 function convertToNumber(value) {
   switch (isNumber(value)) {
     case -1:
-      throw Error('Not a number');
+      throw 'The amount is not a number!';
     case 0:
       return value;
     case 1:
@@ -62,12 +80,14 @@ function isNumber(data) {
 function rollDice(faces) {
   let arr;
 
-  faces = convertToNumber(faces);
+  try {
+    faces = convertToNumber(faces);
+  } catch (error) {
+    throw 'The number of faces is not a number';
+  }
 
   if (faces <= 0) {
-    return {
-      'error': 'The number of faces cannot be below 0.',
-    };
+    throw 'The number of faces must be a positive number greater than 0!';
   }
   // Create the JSON object.
   arr = {

@@ -10,14 +10,19 @@ router.get('/:format?/:amount?', (req, res) => {
   try {
     amount = convertToNumber(amount);
   } catch (error) {
-    res.json({ 'error': 'The amount must be a number!' });
+    res.status(400);
+    res.json({ 'status': 400, 'error': error });
     return;
   }
 
   if (amount > 1) {
     data = [];
   } else if (amount <= 0) {
-    res.json({ 'error': 'The amount must be greater than 0!' });
+    res.status(400);
+    res.json({
+      'status': 400,
+      'error': 'The amount must be a positive number greater than 0!',
+    });
     return;
   }
 
@@ -27,7 +32,11 @@ router.get('/:format?/:amount?', (req, res) => {
       color = getColor(format);
       color.ID = i;
     } catch (error) {
-      res.json({ 'error': 'Format not valid!' });
+      res.status(400);
+      res.json({
+        'status': 400,
+        'error': error,
+      });
       return;
     }
     if (amount == 1) {
@@ -36,6 +45,7 @@ router.get('/:format?/:amount?', (req, res) => {
       data.push(color);
     }
   }
+  res.status(200);
   res.json(data);
 });
 
@@ -90,7 +100,7 @@ function getColor(format) {
         random(0, 256).toString(16),
     };
   } else {
-    throw Error('Format not valid.');
+    throw 'The color format is not valid!';
   }
 
   return arr;
@@ -99,7 +109,7 @@ function getColor(format) {
 function convertToNumber(value) {
   switch (isNumber(value)) {
     case -1:
-      throw Error('Not a number');
+      throw 'The amount is not a number!';
     case 0:
       return value;
     case 1:

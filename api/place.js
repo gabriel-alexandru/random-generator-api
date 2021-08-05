@@ -9,14 +9,22 @@ router.get('/:amount?', (req, res) => {
   try {
     amount = convertToNumber(amount);
   } catch (error) {
-    res.json({ 'error': 'The amount must be a number!' });
+    res.status(400);
+    res.json({
+      'status': 400,
+      'error': error,
+    });
     return;
   }
 
   if (amount > 1) {
     data = [];
   } else if (amount <= 0) {
-    res.json({ 'error': 'The amount must be greater than 0!' });
+    res.status(400);
+    res.json({
+      'status': 400,
+      'error': 'The amount must be a positive number greater than 0!',
+    });
     return;
   }
 
@@ -29,6 +37,7 @@ router.get('/:amount?', (req, res) => {
       data.push(place);
     }
   }
+  res.status(200);
   res.json(data);
 });
 
@@ -53,7 +62,7 @@ function getPlace() {
 function convertToNumber(value) {
   switch (isNumber(value)) {
     case -1:
-      throw Error('Not a number');
+      throw 'The amount is not a number!';
     case 0:
       return value;
     case 1:
