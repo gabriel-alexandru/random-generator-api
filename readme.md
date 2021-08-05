@@ -22,6 +22,8 @@ Return a 400 HTTP code with the following JSON object.
 
 **Person**
 
+Return a 200 HTTP code with the following JSON object.
+
 ```json
 {
   "ID": 0,
@@ -46,6 +48,8 @@ Return a 400 HTTP code with the following JSON object.
 
 **Roll**
 
+Return a 200 HTTP code with the following JSON object.
+
 ```json
 {
   "ID": 0,
@@ -59,6 +63,8 @@ Return a 400 HTTP code with the following JSON object.
 - **roll** is a random number between 1 and the number of faces specified in the request. If it is not specified is assumed to be 6.
 
 **CoinFlip**
+
+Return a 200 HTTP code with the following JSON object.
 
 ```json
 {
@@ -74,6 +80,8 @@ Return a 400 HTTP code with the following JSON object.
 
 **RPS**
 
+Return a 200 HTTP code with the following JSON object.
+
 ```json
 {
   "ID": 0,
@@ -87,6 +95,8 @@ Return a 400 HTTP code with the following JSON object.
 - **result** is a string with the three possible result: "Rock", "Paper", "Scissor".
 
 **Color**
+
+Return a 200 HTTP code with the following JSON object.
 
 ```json
 {
@@ -105,6 +115,8 @@ Return a 400 HTTP code with the following JSON object.
 - **color** is an object containing the values for the color in the specified format.
 
 **Place**
+
+Return a 200 HTTP code with the following JSON object.
 
 ```json
 {
