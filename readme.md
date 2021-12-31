@@ -132,6 +132,22 @@ Return a 200 HTTP code with the following JSON object.
 - **lat** is a string containing a random latitude.
 - **lon** ia a string containing a random longitude;
 
+**Password**
+
+Return a 200 HTTP code with the following JSON object.
+
+```json
+{
+  "ID": 0,
+  "timestamp": "2021-06-30T00:22:18.486Z",
+  "password": "uifbfhcgufkuzgkmeduq"
+}
+```
+
+- **ID** is a counter used to identify the object in the array. It starts from 0.
+- **timestamp** is a UTC formatted string containing date and time of the operation.
+- **password** is a string with the generated password.
+
 ---
 
 ## Generate People
@@ -197,3 +213,28 @@ The parameters can be passed using URL query too.
 | ------- | -------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
 | **GET** | /place         | Return a Place object.                                                                                       |                                                                                     |
 | **GET** | /place/:amount | Return an array with _amount_ Place objects. If _amount_ equals 1 then return an object instead of an array. | <ul><li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |
+
+---
+
+## Password
+
+Request Body:
+
+```json
+{
+  "length": 20,
+  "symbols": true,
+  "numbers": true,
+  "uppercase": true
+}
+```
+
+- **length** is the amount of characters for the password. Can be either a number or a string (20 or '20' or "20"). Default is 8.
+- **symbols** is a boolean flag to specify if symbols need to be inside password. Default is false.
+- **numbers** is a boolean flag to specify if numbers need to be inside password. Default is false
+- **uppercase** is a boolean flag to specify if uppercase letters need to be inside password. Default is false.
+
+| Method  | Endpoint          | Description                                                                                                     | Parameters values                                                                   |
+| ------- | ----------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **GET** | /password         | Return a password object.                                                                                       |                                                                                     |
+| **GET** | /password/:amount | Return an array with _amount_ Password objects. If _amount_ equals 1 then return an object instead of an array. | <ul><li>**amount**: The amount of objects wanted. Must be greater than 0.</li></ul> |

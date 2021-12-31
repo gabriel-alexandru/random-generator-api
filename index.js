@@ -8,6 +8,7 @@ const dice = require('./api/dice');
 const people = require('./api/people');
 const place = require('./api/place');
 const rps = require('./api/rps');
+const password = require('./api/password');
 
 // Create the app and setup listening on port 3000.
 const app = express();
@@ -27,3 +28,4 @@ app.use('/dice', dice);
 app.use('/people', people);
 app.use('/place', place);
 app.use('/rps', rps);
+app.use('/password', password);
